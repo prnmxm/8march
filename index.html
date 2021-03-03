@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+          * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .root {
+            position: relative;
+            min-height: 100vh;
+            background-color: pink;
+        }
+
+        .block {
+            box-sizing: border-box;
+            line-height: 1.2;
+            display: block;
+            position: fixed;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 10px;
+            max-width: 300px;
+            min-width: 100px;
+            background-color: rgb(204, 154, 162);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 1s;
+            transform: scale(1)
+        }
+
+        .block_add {
+            opacity: 1;
+        }
+    </style>
+    <div class="root">
+    
+    <svg style='position: absolute; width: 50%; height:40%; top:50%; left:50%; transform:translate(-50%,-50%);' viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg"><path style="fill: #ab7575" fill='#ab7575' d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/></svg>    </div>
+        <script>
+		const text = [
+    'С Международным женским днем!',
+    'С 8 Марта!',
+    'Ты прелестна, словно роза, только разница одна: роза вянет от мороза, твоя прелесть — никогда!',
+    'Желаю счастья и любви — они дороже всех подарков! И пусть все сбудутся мечты в прекрасный день 8 марта!',
+    'С праздником весны тебя! Пусть улыбается солнце, смеются цветы, и всегда остаешься очаровательной ты!',
+    'Среди весенних первых дней 8 Марта всех дороже. На всей земле, для всех людей весна и женщины похожи.',
+    'Восьмое марта — день такой, что ждут девчонки всей душой. Тебе хочу я пожелать в прекрасный праздник кайфовать!',
+    'Солнышко мое, привет! Тебя сегодня поздравляю! Другой такой на свете нет! Люблю тебя и по тебе скучаю.',
+    'Восьмое марта женщины так ждут — они полгода жизни отдадут, за то, чтоб этот праздник наступил, и чтоб мужик подарки подарил.',
+    'Скоро уж наступит вечер, ждешь ли ты со мною встречи? Праздник женский за окном, быть хочу с тобой вдвоем!',
+    'Хочу поздравить вас сердечно с веселым праздником весны.И солнца свет, и взгляд ваш ясный нам одинаково нужны!',
+    'Пусть невзгоды жизни пролетают мимо, как ручей весною пусть играет кровь!Я тебе желаю быть всегда любимой и в любые годы чувствовать любовь.',
+    'Весны Вам голубой и нежной, счастливых дней и радостной мечты!Пусть март подарит, хоть и снежный, свои улыбки и цветы!',
+    'Хочу поздравить вас сердечно с веселым праздником весны. И солнца свет, и взгляд ваш ясный нам одинаково нужны!',
+'Милые женщины! Мы вам желаем: Будьте счастливы в апреле и в мае, Нынче и завтра, и тысячи лет! Нынче на женщинах держится свет.',
+'Пусть невзгоды жизни пролетают мимо, как ручей весною пусть играет кровь! Я тебе желаю быть всегда любимой и в любые годы чувствовать любовь.',
+'Весны Вам голубой и нежной, счастливых дней и радостной мечты! Пусть март подарит, хоть и снежный, свои улыбки и цветы!',
+'Есть много праздников в стране, но женский день отдан Весне, ведь только женщинам подвластно создать весенний праздник — лаской.',
+'Весна приносит обновленье, улыбки, счастье и цветы. И я хочу, чтоб в день весны рожденья, твои исполнились мечты!',
+'Поздравляем с праздником — Женским днем, И желаем радости И удач во всём.',
+'С днем 8 марта поздравляем! Благ вам всяческих желаем, Пусть не старят вас года, Будьте Молоды всегда!',
+'Пусть сердце в такт стучит капели, Пусть канут в прошлое метели, И пусть в весенних хороводах Забудет сердце о невзгодах.',
+'Желаем счастья много — много, Кусочек неба голубого, А в нем — желанную звезду: Свою любовь, свою мечту!',
+'С Мартом Вас таящим, c Мартом бушующим, С самым ликующим, cамым волнующим. Желаем Вам счастья сердечного, Самого ясного, самого вечного.',
+'С праздником весны и красоты, Тебя сегодня поздравляю. И вместе с тем тебе желаю, Чтобы сбылись твои мечты.',
+'Поздравляем c праздником — Женским днем, И желаем радости И удач во всем.',
+'С 8 марта тебя поздравляю Наслаждаясь дыханьем весны Много счастья тебе я желаю Пусть исполнятся все твои мечты.',
+'Пусть первым мартовским лучом Спешит к Вам счастье в светлый дом. Пусть день весенний яркий Несет хорошие подарки.',
+'Весны Вам голубой и нежной, Счастливых дней и радостной мечты! Пусть март подарит, хоть и снежный, Свои улыбки и цветы!',
+'Сегодня день особый! Правда? Прекрасный праздник у весны! Сегодня День 8 Марта — Так пусть счастливой будешь ты!',
+'Еще деревья спят, Досматривая сны. Тебя поздравить рад Я с Праздником весны!',
+'Женщина — это весна, Образ цветущий и нежный. Женщина — это всегда Мир лучезарный, безбрежный. Вот уже сколько лет Тобою я очарован. Ты — надежда и свет, Тобою я околдован.',
+'Приятней нет и проще, Чем с праздником весны Свою поздравить тещу — Мать любящей жены. Сердечно поздравляю С нахлынувшей весной И искренне желаю Быть вечно молодой.',
+'Весна приносит обновленье, Улыбки, счастье и цветы. И я хочу, чтоб в день весны рожденье Твои исполнились мечты!',
+'Пусть отблеск зимний еще не угас, Но воздух становится зыбким. С Женским весенним праздником Вас, С первой весенней улыбкой!',
+'Твои любимые цветы Согрею я своим дыханьем В день Женского Очарованья. Они прекрасны, как и ты! И пусть исполнятся мечты, И сбудутся Весны желанья, И сердцу милые черты Пленяют также обаяньем! С праздником!',
+'Не знай забот, живи счастливо, Чтоб говорили все всегда: Как эта женщина красива, Как бесконечно молода!',
+'С днем 8 Марта! С праздником весенним! Льется пусть повсюду Звонкое веселье! Пусть сияет солнце! Пусть уйдут морозы! Пусть прогонит зиму Веточка мимозы!',
+'Пусть первый подснежник Подарит Вам нежность! Весеннее солнце подарит тепло! А мартовский ветер подарит надежду, И счастье, и радость, и только добро!',
+'Happy Women’s Day! Thanks for always being there!',
+'In every moment I spend with you, it becomes magic in my life. Thanks for making our house the loveliest place to be in on the planet earth! Happy Women’s Day!',
+'Happy Women’s Day, My Darling! Feel special, unique and on top of the world! It’s your day!',
+'My dear friend! Today is yours, and so is ever other day. Be happy, live your life fully, do whatever you want and may all you dreams come true! Happy Women’s Day!',
+'Every woman deserves a man who looks at her every day like it’s the first time he saw her.',
+'May your sunny and enthusiastic spirit be with you always! Happy Women’s Day!',
+'Dear,I wish you health, happiness, love and prosperity.Let the kindness, care and attention always be with you!',
+'Dear LadiesPlease, be smiling and laughing!Be happy! Dont worry!Make love, not war!And everything will be ok!Let it be! Thank you',
+'I like the way you look,I like the way you cook,Now I want to say: «Happy Womens Day!»',
+'First sounds of melting snow,Last snowstorm,Its holiday of early springOf happiness, health, love and dream!',
+'Let joy today sun shines,In shade having left sheaf of the greater alerts,And all flowers, what there is on light,Bloom today let beside Your legs',
+'Let sing little streams in your honourLet sunny smile at youAnd men give flowers to you',
+'Let snowdrop bring tenderness to you!Spring sun bring warmth and love!March wind bring hope and great charm!And happiness, and joy, and merry life!',
+'Let the sun decorates the world,The Spring will present the paints!On Eighth of March gives splashIn Love, Attention and caress!',
+'Let, the first snowdrop willPresent You tenderness!The Spring sun will present the heat!But march wind will present the hope,And happiness, and joy, and only good!',
+'Let this Day of SpringBe full of miracle for you!And full of cleanliness,And spicy smells of wood',
+'Let will this Day of the SpringtimeFor You particularly miraculousAnd full clear depth And spicy scent wood.Let scarlet colour and turquoiseGive birth festive and canto, willLet be a bright eye,And will be glad to lead',
+'My dear, dear Mommy,I love you so much.I want you to be happyOn the 8th of March',
+'One of the days at year,When You put into all smile heat,When flowers bloom in shower!And in this light hour, as previously newlyLet will You to accompany: The Hope, Faith and Love!',
+'On holiday of springtime I congratulate you!Happiness, health and merry life I wish you!Let this spring bring youMany smiles, warmth and kindness!',
+'She is always aheadOf what she may…All the best wishes for youOn this special day!',
+'The March 8 is a women s day!And in this light hour, as previously newlyLet will You to accompany:The Hope, Belief and Love!',
+'The world is a better place because of the presence of women,mothers, sisters, daughters, friends or wives…no matter what their role is.They add meaning to our existence…They bring love to our life.Happy womens day!',
+'With fragrant twig of lilacSpring comes to every house,From the bottom of my heartCongratulate On Womens day!',
+'With holiday of the springtime you congratulate!Happiness, health, revelry want!Let, this springtime will bring for youMuch smiles, heats and good!',
+'You have everything in you,Thats the reason why the world is celebrating you!So, follow your dreams…And make them come true!',
+'Bonne journée de la Femmes !',
+'Meilleurs voeux pour la Journée de la Femme!',
+'Si aimer est un art, je veux être artiste ! Sois ma source d’inspiration, mon eau vive. En toi je puise la force de croire au bonheur. Merci pour la couleur de ton amour et ta présence à mes côtés.',
+'Toutes les femmes méritent le respect et la considération. Mais entre toutes les femmes, tu es celle à qui ma tendresse est acquise, pour toujours. Je n’oublierai jamais l’amour dont tu m’as comblé. Joyeuse journée des femmes !',
+'Aujourd’hui, c’est la journée des femmes, or tu es une femme (et quelle femme !). C’est donc, de ce fait, ta journée. Je te la souhaite belle, pleine de douceur et de petites attentions.',
+'Pour célébrer les femmes comme il se doit, une seule journée ne suffirait pas, alors imagine combien de journées il faudrait pour te célébrer, Toi, femme entre toutes les femmes ! Je t’aime ma chérie ; que cette journée du 8 mars te soit belle et douce, à ton image.',
+'З 8 Березня, улюблена, Будь щаслива і кохана, Принесе нехай натхнення Ця пора тобі весняна. Мрії збудуться всі світлі, Буде все, як хочеш ти. Я бажаю лиш з надією Уперед завжди іти.',
+'Il parait qu’aujourd’hui, c’est notre journée à nous les femmes. Il est vrai que nous le valons bien, surtout toi et moi qui sommes deux spécimens particulièrement bien réussis ;-) Meilleurs voeux pour la Journée de la Femme, mon amie!'
+]
+const root = document.querySelector('.root');
+let trueFalse = false;
+function getRandom(arr){
+    const array = arr;
+    const arrayLength = arr.length - 1;
+    function randomNumber(){
+        const rand = Math.floor(Math.random() * (array.length));
+        return rand;
+    }
+    function getText(number){
+        return array[number];
+    }
+    return {randomNumber, getText, arrayLength};
+}
+
+const randomText = getRandom(text);
+
+const memo = (callback) => {
+
+    const cacheKey = new Map();
+    const cacheRandom = new Set();
+
+    return (e) => {
+        const key = `${e.pageX}${e.pageY}`;
+        if(cacheKey.has(key)){
+            const result = cacheKey.get(key);
+            return result;
+        }
+        let randomNumb = callback.randomNumber();
+        while(cacheRandom.has(randomNumb)){
+            randomNumb = callback.randomNumber();
+        }
+        if(cacheRandom.size === callback.arrayLength){
+            cacheRandom.clear();
+        }
+        cacheRandom.add(randomNumb);
+        if(randomNumb === 71){
+            trueFalse = true;
+        }
+        const result = callback.getText(randomNumb);
+        cacheKey.set(key, result);
+        return result;
+    }
+}
+function randomInteger(min, max) {
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  return Math.round(rand);
+}
+
+const createMemo = memo(randomText);
+const createTemplate = (text, posX , posY,sideX, sideY) => {
+    const template = document.createElement('div');
+    template.classList.add('block');
+    template.style.backgroundColor = `RGB(${randomInteger(170, 210)},${randomInteger(140, 175)},${randomInteger(140, 175)})`;
+    if(trueFalse){
+        template.style.backgroundColor = '#e2425c';
+        template.style.padding = '20px';
+        template.classList.add('anim');
+        trueFalse = false;
+    }
+    template.textContent = text;
+    navigator.clipboard.writeText(`${text}`)
+    template.style[sideY] = `${posY}px`;
+    template.style[sideX] = `${posX}px`;
+    return template;
+};
+const appendToContainer = (cont, max) => {
+    const container = cont;
+    let counter = 0;
+    const maxCounter = max;
+    
+let currentId = 1;
+let i = 1;
+    function clear(){
+        const containerElement = document.getElementById(i++);
+        setTimeout(()=>{
+            containerElement.classList.remove('block_add');
+            setTimeout(()=>{
+                containerElement.remove();
+            },1000)
+        })
+        counter--;
+    }
+      
+    function create(template){
+        if(counter >= maxCounter){
+            clear();
+        }
+        const block = template;
+        block.id = currentId++;
+        container.appendChild(block);
+        setTimeout(()=>{
+            block.classList.add('block_add')
+        });
+        counter++;
+    }
+
+    return create;
+}
+const append = appendToContainer(root, 20);
+
+const memoTwo = (container) => {
+    let prevValue;
+    return (pageY, pageX)=>{
+        const val = pageX + pageY;
+
+        if(prevValue === val){
+            return true;
+        }
+
+        prevValue = val;
+        return false;
+    }
+}
+const memoPos = memoTwo(root);
+
+root.addEventListener('click', (e) => {
+    const sideX = window.innerWidth - e.pageX < 150? 'right'  : 'left';
+    const sideY = window.innerHeight - e.pageY < 50? 'bottom': 'top';
+    let xPos = window.innerWidth - e.pageX < 150 ? window.innerWidth - e.pageX : e.pageX
+    let yPos = window.innerHeight - e.pageY < 50 ? window.innerHeight - e.pageY : e.pageY
+    const ttt = memoPos(e.pageY,e.pageX);
+     if(ttt === false){
+        const template = createTemplate(createMemo(e), xPos , yPos, sideX, sideY) 
+        append(template)
+    }
+})
+
+</script>
+</body>
+
+</html>
+
